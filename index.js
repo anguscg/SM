@@ -3,6 +3,9 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+app.use(express.json())
+
+
 let issues = [{
     id: "1",
     title: "first issue",
@@ -18,5 +21,12 @@ app.get('/issue', (req,res) => {
     res.json(issues)
 })
 
-app.listen(port, () => console.log(`listening on port ${port}`);
-)
+app.post('/issue', (req,res) => {
+    let issue = req.body
+    console.log(issue)
+    issues.push(issue)
+    res.send("issue posted to issues")
+})
+
+app.listen(port, () => console.log(`listening on port ${port}`));
+
